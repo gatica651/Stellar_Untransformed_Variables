@@ -300,7 +300,6 @@ int main(int argc, char* argv []) {
     double zero_pressure_distance = 0.0;
     bool zero_pressure_reached = false;
     int zero_pressure_j = 0;
-    //double density, opacity, energy_generation;
 
     // VARIABLES OF THE ALGORITHM
 
@@ -570,6 +569,8 @@ int main(int argc, char* argv []) {
             std::cout << setw(20) << fstar << "    ";
             std::cout << setw(20) << tstar << "    ";
             std::cout << "\n";
+
+
         }
     }
         
@@ -1232,9 +1233,8 @@ int main(int argc, char* argv []) {
         std::cout << setw(20) << 0.0 << "    ";
         std::cout << "\n";
 
-        temperature_constants_factor = (mu * proton_mass * gravitational_constant * mass) / (4.25 * boltzmann_constant);        //radiative
+        temperature_constants_factor = (mu * proton_mass * gravitational_constant * Total_Mass) / (4.25 * boltzmann_constant);        //radiative
         //constants_factor = (mu * proton_mass * gravitational_constant * mass) / (2.5 * boltzmann_constant);       //convective
-
         pressure_fundamental_factors = (2.0 / 8.5) * (4.0 * radiation_density_constant * speed_of_light / 3.0) * (boltzmann_constant / proton_mass);
         pressure_stellar_factors = (4.0 * pi * gravitational_constant) / (mu * chi_zero);
         pressure_all_factors = pow((pressure_fundamental_factors * pressure_stellar_factors) * (Total_Mass / Total_Luminosity), 0.5);
@@ -1256,9 +1256,7 @@ int main(int argc, char* argv []) {
         const double surface_t_over_tentosix = 5.0;                                                                      //Schwarzschild page 83, Table 10.1
         const double surface_epsilon1 = 0.0000001;                                                                       //Schwarzschild page 83, Table 10.1
         const double surface_nu = 6.0;                                                                                   //Schwarzschild page 83, Table 10.1
-        const double surface_energy_generation = surface_epsilon1 * surface_density * hydrogen_fraction * hydrogen_fraction * pow(surface_t_over_tentosix, surface_nu);  //proton-proton only
-
-
+        double surface_energy_generation = 0.0;
 
         for (int n = 0; n < numberofsteps; n++) {
             from_surface = double(n) * step;
@@ -1277,8 +1275,8 @@ int main(int argc, char* argv []) {
             t_surface[n] = surface_temperature;
 
             surface_density = (mu * surface_pressure * proton_mass) / (boltzmann_constant * surface_temperature);
-
             surface_opacity = chi_zero * surface_density / pow(surface_temperature, 3.5);
+            surface_energy_generation = surface_epsilon1 * surface_density * hydrogen_fraction * hydrogen_fraction * pow(surface_t_over_tentosix, surface_nu);  //proton-proton only
 
             if (n == 0) {
                 p_surface_derivatives[0] = 0.0;
@@ -1291,7 +1289,7 @@ int main(int argc, char* argv []) {
                 // Note opposite signs from outward calculation.
                 p_surface_derivatives[n] = (surface_density * gravitational_constant * q_surface[n]) / pow(r, 2);
                 q_surface_derivatives[n] = -surface_density * 4.0 * pi * pow(r, 2);
-                f_surface_derivatives[n] = -surface_density * 4.0 * pi * pow(r, 2) * central_energy_generation;
+                f_surface_derivatives[n] = -surface_density * 4.0 * pi * pow(r, 2) * surface_energy_generation;
                 t_surface_derivatives[n] = (3.0 / (4.0 * radiation_density_constant * speed_of_light)) * (surface_opacity * surface_density / pow(t_surface[n], 3)) * (f_surface[n] / (4.0 * pi * pow(r, 2)));
             }
 
@@ -1477,32 +1475,11 @@ int main(int argc, char* argv []) {
 
                 ab_p_derivatives[k] = (density * gravitational_constant * ab_q_values[k]) / pow(tmpr, 2);
                 ab_q_derivatives[k] = -density * 4.0 * pi * pow(tmpr, 2);
-                ab_f_derivatives[k] = -density * 4.0 * pi * pow(tmpr, 2) * central_energy_generation;
-                ab_t_derivatives[k] = (3.0 / (4.0 * radiation_density_constant * speed_of_light)) * (central_opacity * density / pow(ab_t_values[k], 3)) * (ab_f_values[k] / (4.0 * pi * pow(tmpr, 2)));
+                ab_f_derivatives[k] = -density * 4.0 * pi * pow(tmpr, 2) * surface_energy_generation;
+                ab_t_derivatives[k] = (3.0 / (4.0 * radiation_density_constant * speed_of_light)) * (surface_opacity * density / pow(ab_t_values[k], 3)) * (ab_f_values[k] / (4.0 * pi * pow(tmpr, 2)));
                 std::cout << "\n";
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     }
