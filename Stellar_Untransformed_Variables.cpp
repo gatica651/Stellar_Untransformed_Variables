@@ -239,14 +239,14 @@ int main(int argc, char* argv []) {
     const double nu = 4.0;                                                                                //Schwarzschild page 83, Table 10.1
     const double gbart = 1.0;                                                                             // Schwarzschild equation 9.16
     const double gffbar = 1.0;                                                                            // Schwarzschild equation 9.18
-    bool gas_equation_central_density = false;
+    bool gas_equation_density = false;
     double central_density = 0.0;
     double chi_zero = 0.0;
     double chi_bf = 0.0;
     double chi_ff = 0.0;
     double central_opacity = 0.0;
 
-    if (gas_equation_central_density == true) {
+    if (gas_equation_density == true) {
         std::cout << "\n";
         central_density = (mu * Central_Pressure * proton_mass) / (boltzmann_constant * Central_Temperature);
         std::cout << "\n";
@@ -254,14 +254,14 @@ int main(int argc, char* argv []) {
     }
 
 
-    if (gas_equation_central_density == false) {
+    if (gas_equation_density == false) {
         std::cout << "\n";
         central_density = 3.0;
         std::cout << "\n";
         std::cout << "\n";
     }
 
-    chi_bf = (4.34 * pow(10, 25) * gbart * heavy_fraction * (1.0 + hydrogen_fraction));                             // Schwarzschild equation 9.16
+    chi_bf = (4.34 * pow(10, 25) * gbart * heavy_fraction * (1.0 + hydrogen_fraction));                              // Schwarzschild equation 9.16
     chi_ff = (3.68 * pow(10, 22) * gffbar * (hydrogen_fraction + helium_fraction) * (1.0 + hydrogen_fraction));      // Schwarzschild equation 9.18
     chi_zero = chi_bf + chi_ff;
 
@@ -270,6 +270,8 @@ int main(int argc, char* argv []) {
     const double central_energy_generation = epsilon1 * central_density * hydrogen_fraction * hydrogen_fraction * pow(t_over_tentosix, nu);  //proton-proton only
 
     std::cout << "Total Mass =  " << Total_Mass;
+    std::cout << "\n";
+    std::cout << "Total Luminosity =  " << Total_Luminosity;
     std::cout << "\n";
     std::cout << "Composition =  " << mu;
     std::cout << "\n";
@@ -459,14 +461,14 @@ int main(int argc, char* argv []) {
     //Central_Temperature = 1.57 * pow(10, 7) Kelvin
     //luminosity = 3.8 * pow(10, 26) watts
 
-    if (gas_equation_central_density == true) {
+    if (gas_equation_density == true) {
         std::cout << "\n";
         std::cout << "IDEAL GAS EQUATION CENTRAL DENSITY";
         std::cout << "\n";
         std::cout << "\n";
     }
 
-    if (gas_equation_central_density == false) {
+    if (gas_equation_density == false) {
         std::cout << "\n";
         std::cout << "INTERMEDIATE CENTRAL DENSITY";
         std::cout << "\n";
@@ -1274,7 +1276,16 @@ int main(int argc, char* argv []) {
             f_surface[n] = Total_Luminosity;
             t_surface[n] = surface_temperature;
 
-            surface_density = (mu * surface_pressure * proton_mass) / (boltzmann_constant * surface_temperature);
+            if (gas_equation_density == true) {
+                surface_density = (mu * surface_pressure * proton_mass) / (boltzmann_constant * surface_temperature);
+            }
+
+
+            if (gas_equation_density == false) {
+                // temporary estimate
+                surface_density = central_density/10.0;
+            }
+
             surface_opacity = chi_zero * surface_density / pow(surface_temperature, 3.5);
             surface_energy_generation = surface_epsilon1 * surface_density * hydrogen_fraction * hydrogen_fraction * pow(surface_t_over_tentosix, surface_nu);  //proton-proton only
 
@@ -1473,10 +1484,10 @@ int main(int argc, char* argv []) {
                 tmp = ab_t_values[k];
                 std::cout << setw(20) << tmp;
 
-                ab_p_derivatives[k] = (density * gravitational_constant * ab_q_values[k]) / pow(tmpr, 2);
-                ab_q_derivatives[k] = -density * 4.0 * pi * pow(tmpr, 2);
-                ab_f_derivatives[k] = -density * 4.0 * pi * pow(tmpr, 2) * surface_energy_generation;
-                ab_t_derivatives[k] = (3.0 / (4.0 * radiation_density_constant * speed_of_light)) * (surface_opacity * density / pow(ab_t_values[k], 3)) * (ab_f_values[k] / (4.0 * pi * pow(tmpr, 2)));
+                ab_p_derivatives[k] = (surface_density * gravitational_constant * ab_q_values[k]) / pow(tmpr, 2);
+                ab_q_derivatives[k] = -surface_density * 4.0 * pi * pow(tmpr, 2);
+                ab_f_derivatives[k] = -surface_density * 4.0 * pi * pow(tmpr, 2) * surface_energy_generation;
+                ab_t_derivatives[k] = (3.0 / (4.0 * radiation_density_constant * speed_of_light)) * (surface_opacity * surface_density / pow(ab_t_values[k], 3)) * (ab_f_values[k] / (4.0 * pi * pow(tmpr, 2)));
                 std::cout << "\n";
             }
         }
