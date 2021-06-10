@@ -36,6 +36,4 @@ The code does not :
 The code is not guaranteed to be bug-free nor to be in the most elegant form.
 Please use and develop the uploaded Papers 1-3 and this code as you wish but credit me please : 
 
-Peter Gardner : peter.gardner13@btopenworld.com, UK 07495 416625, also see my LinkedIn profile.
-
-The original uploaded papers and code are read-only
+Peter Gardner : peter.gardner13@btopenworld.com, UK 07495 416625, also see my LinkedIn profile
