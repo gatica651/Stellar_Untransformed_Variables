@@ -17,6 +17,8 @@ The code does essentially four things :
 + Inputs these starting values into an Adams-Bashforth integration algorithm and calculates outwards towards the surface of the star
 + Calculates a few starting values at the stellar surface using an approximation where mass and luminosity are assumed constant and at their full values
 + Inputs these starting values into the same Adams-Bashforth integration algorithm and calculates inwards towards the centre of the star
+
+
 + There is code for simple extrapolation that is not used and could maybe be removed
 + There is some undeveloped code for calculations in transformed variables. This needs completion.
 
