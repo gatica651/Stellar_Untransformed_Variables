@@ -29,6 +29,7 @@ The code was developed under VisualStudio v16.8.4
 
 The code does not :
 + Attempt to join the outward and inward solutions to get a full solution
++ Do calculations for convective energy transfer
 + Do evolutionary calculations where the star develops in time and its chemical composition changes
 + Apply the Henyey method of stellar structure calculation
 + Do calculations with the stellar mass (instead of distance) as the independent variable.
