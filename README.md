@@ -22,10 +22,10 @@ The code does essentially four things :
 
 The code was developed under VisualStudio v16.8.4
 
-Figure 1 in Paper 3 gives the basic differential equations
-Figure 2 in Paper 3 gives the constant density approximation equations for the stellar centre
-Section 2.1.2 in Paper 3 gives the constant mass and luminosity approximation equations for the stellar surface
-Section 2.1.3 in Paper 3 describes the Adams-Bashforth integration algorithm 
++ Figure 1 in Paper 3 gives the basic differential equations
++ Figure 2 in Paper 3 gives the constant density approximation equations for the stellar centre
++ Section 2.1.2 in Paper 3 gives the constant mass and luminosity approximation equations for the stellar surface
++ Section 2.1.3 in Paper 3 describes the Adams-Bashforth integration algorithm 
 
 The code does not :
 + Attempt to join the outward and inward solutions to get a full solution
