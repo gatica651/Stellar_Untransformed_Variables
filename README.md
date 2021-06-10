@@ -3,11 +3,11 @@
                                
 This project contains C++ code to calculate the structure of main sequence stars.
 
- The code is derived from equations in Papers 2 and 3 of this series :
+The code is derived from equations in Papers 2 and 3 of this series :
 
- Paper 1 : TechnicalNote_StellarStructure         (this is TBD, not uploaded yet)
- Paper 2 : TechnicalNote_NumericalIntegration     (this is uploaded and substantially complete)
- Paper 3 : TechnicalNote_CplusplusCode            (this is uploaded but lacks sections on transformed variables and Henyey calculations)
+Paper 1 : TechnicalNote_StellarStructure         (this is TBD, not uploaded yet)
+Paper 2 : TechnicalNote_NumericalIntegration     (this is uploaded and substantially complete)
+Paper 3 : TechnicalNote_CplusplusCode            (this is uploaded but lacks sections on transformed variables and Henyey calculations)
 
  Papers 2 and 3 are also in the project.
 
