@@ -13,19 +13,19 @@ Papers 2 and 3 are also in the project.
 
 The code does essentially four things :
 
-Calculates a few starting values at the stellar centre using a constant density approximation
+* Calculates a few starting values at the stellar centre using a constant density approximation
 
-Inputs these starting values into an Adams-Bashforth integration algorithm and calculates outwards towards the surface of the star
+* Inputs these starting values into an Adams-Bashforth integration algorithm and calculates outwards towards the surface of the star
 
-Calculates a few starting values at the stellar surface using an approximation where mass and luminosity are assumed constant and at their full values
+* Calculates a few starting values at the stellar surface using an approximation where mass and luminosity are assumed constant and at their full values
 
-Inputs these starting values into the same Adams-Bashforth integration algorithm and calculates inwards towards the centre of the star
+* Inputs these starting values into the same Adams-Bashforth integration algorithm and calculates inwards towards the centre of the star
 
-There is code for simple extrapolation that is not used and could maybe be removed
+* There is code for simple extrapolation that is not used and could maybe be removed
 
-There is some undeveloped code for calculations in transformed variables. This needs completion.
+* There is some undeveloped code for calculations in transformed variables. This needs completion.
 
-The code is C++ and was developed under VisualStudio v16.8.4
+* The code was developed under VisualStudio v16.8.4
 
 Figure 1 in Paper 3 gives the basic differential equations
 Figure 2 in Paper 3 gives the constant density approximation equations for the stellar centre
