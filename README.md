@@ -20,7 +20,7 @@ The code does essentially four things :
 + There is code for simple extrapolation that is not used and could maybe be removed
 + There is some undeveloped code for calculations in transformed variables. This needs completion.
 
-The code was developed under VisualStudio v16.8.4
+The code uses the following sources :
 
 + Figure 1 in Paper 3 gives the basic differential equations
 + Figure 2 in Paper 3 gives the constant density approximation equations for the stellar centre
@@ -28,13 +28,14 @@ The code was developed under VisualStudio v16.8.4
 + Section 2.1.3 in Paper 3 describes the Adams-Bashforth integration algorithm 
 
 The code does not :
+
 + Attempt to join the outward and inward solutions to get a full solution
 + Do calculations for convective energy transfer
 + Do evolutionary calculations where the star develops in time and its chemical composition changes
 + Apply the Henyey method of stellar structure calculation
 + Do calculations with the stellar mass (instead of distance) as the independent variable.
 
-The code is not guaranteed to be bug-free nor to be in the most elegant form.
+The code was developed under VisualStudio v16.8.4. It is not guaranteed to be bug-free nor to be in the most elegant form.
 Please use and develop the uploaded Papers 1-3 and this code as you wish but credit me please : 
 
 Peter Gardner : peter.gardner13@btopenworld.com, UK 07495 416625, also see my LinkedIn profile
