@@ -9,7 +9,8 @@ Paper 1 : TechnicalNote_StellarStructure         (this is TBD, not uploaded yet)
 Paper 2 : TechnicalNote_NumericalIntegration     (this is uploaded and substantially complete)
 Paper 3 : TechnicalNote_CplusplusCode            (this is uploaded but lacks sections on transformed variables and Henyey calculations)
 
-Papers 2 and 3 are also in the project.Yes.
+Papers 2 and 3 are also in the project.
+Yes.
 
 // The code does essentially four things :
 // Calculates a few starting values at the stellar centre using a constant density approximation
