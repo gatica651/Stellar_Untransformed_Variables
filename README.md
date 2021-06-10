@@ -36,6 +36,6 @@ The code does not :
 + Do calculations with the stellar mass (instead of distance) as the independent variable.
 
 The code was developed under VisualStudio v16.8.4. It is not guaranteed to be bug-free nor to be in the most elegant form.
-Please use and develop the uploaded Papers 1-3 and this code as you wish but credit me please : 
++ Please use and develop the uploaded Papers 1-3 and this code as you wish but credit me please : 
 
 Peter Gardner : peter.gardner13@btopenworld.com, UK 07495 416625, also see my LinkedIn profile
