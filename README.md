@@ -13,7 +13,7 @@ Papers 2 and 3 are also in the project as can be seen in the listing above.
 
 The code does essentially four things :
 
-+ Calculates a few starting values at the stellar centre using a constant density approximation
++ Calculates a few starting values at the stellar centre using a modified constant density approximation
 + Inputs these starting values into an Adams-Bashforth integration algorithm and calculates outwards towards the surface of the star
 + Calculates a few starting values at the stellar surface using an approximation where mass and luminosity are assumed constant and at their full values
 + Inputs these starting values into the same Adams-Bashforth integration algorithm and calculates inwards towards the centre of the star
