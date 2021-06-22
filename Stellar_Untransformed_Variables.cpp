@@ -136,18 +136,27 @@ int main(int argc, char* argv[]) {
     double r = 0.0;
     double tmp, tmpr;
     const bool pctc = true;
-    const bool mrl = true;
+    const bool mrl = false;
 
     chi_bf = (4.34 * pow(10, 25) * gbart * heavy_fraction * (1.0 + hydrogen_fraction));                              // Schwarzschild equation 9.16
     chi_ff = (3.68 * pow(10, 22) * gffbar * (hydrogen_fraction + helium_fraction) * (1.0 + hydrogen_fraction));      // Schwarzschild equation 9.18
     chi_zero = chi_bf + chi_ff;
 
+    //OUTWARD CALCULATION
+    //This program contains, at the top level, two independent loops.
+    //The "pctc" loop below is the outward calculation (i.e from the stellar centre).
+    //It has the central pressure and central temperature as the two parameters
+    //of the calculation - see section 2.1.1 of TechnicalNote_CplusplusCode.docx. 
+    //A solution is calculated for a range of central pressures and central
+    //temperatures. The range and step sizes are easily changed by editing
+    //the variables pressure_exponent, pressure_multiplier, temperature_exponent
+    //and temperature_multiplier.
+
+
     if (pctc) {
 
-        // PRESSURE LOOP
-
-        const int numberofsteps_pressure = 5;
-        const int numberofsteps_temperature = 5;
+        const int numberofsteps_pressure = 1;
+        const int numberofsteps_temperature = 1;
         //Schwarszchild equation 8.2
         double Central_Pressure = 0.0;
         double Central_Temperature = 0.0;
@@ -158,14 +167,14 @@ int main(int argc, char* argv[]) {
 
         for (int m = 0; m < numberofsteps_pressure; m++) {
 
-            pressure_exponent = 17.0;
-            pressure_multiplier = double(m) + 1.0;
+            pressure_exponent = 17.13;
+            pressure_multiplier = 1.0;
             Central_Pressure = pressure_multiplier * pow(10, pressure_exponent);
 
             for (int k = 0; k < numberofsteps_temperature; k++) {
 
-                temperature_exponent = 7.0;
-                temperature_multiplier = double(k) + 2.0;
+                temperature_exponent = 7.093;
+                temperature_multiplier = 1.0;
                 Central_Temperature = temperature_multiplier * pow(10, temperature_exponent);
 
                 OutResults_File_pctc << Central_Pressure;
@@ -688,6 +697,14 @@ int main(int argc, char* argv[]) {
     }
 
     // INWARD SOLUTION
+    //The "mrl" loop below is the inward calculation (i.e from the stellar surface).
+    //It has Model_Mass, Model_Radius, and Model_Luminosity as the three parameters
+    //of the calculation - see section 2.1.2 of TechnicalNote_CplusplusCode.docx. 
+    //A solution is calculated for a range of Model_Radius and Model_Luminosity. 
+    //The range and step sizes are easily changed by editing the variables radius_exponent, 
+    //radius_multiplier, luminosity_exponent and luminosity_multiplier.
+    //There is currently no loop for the mass.
+    //
 
     if (mrl) {
 
@@ -716,9 +733,9 @@ int main(int argc, char* argv[]) {
         std::cout << "\n";
         std::cout << "\n";
 
-        double Model_Mass = 2.0 * pow(10, 33);                  //Wikipedia (grams). This is fixed by assumption.
+        double Model_Mass = 2.0 * pow(10, 33);                  //Wikipedia (grams).
         double Model_Radius = 7.0 * pow(10, 10);
-        double Model_Luminosity = 6.0 * pow(10, 33);            //Schwarzschild page 42. This is a parameter of the model
+        double Model_Luminosity = 6.0 * pow(10, 33);            //Schwarzschild page 42.
 
         if (untransformed) {
 
@@ -752,19 +769,21 @@ int main(int argc, char* argv[]) {
 
 
             const int numberofsteps_radius = 3;
+            double radius_exponent = 10.0;
             double radius_multiplier = 0.0;
             const int numberofsteps_luminosity = 3;
+            double luminosity_exponent = 33.0;
             double luminosity_multiplier = 0.0;
 
             for (int j = 0; j < numberofsteps_radius; j++) {
 
                 radius_multiplier = 6.0 + double(j);
-                Model_Radius = radius_multiplier * pow(10, 10);
+                Model_Radius = radius_multiplier * pow(10, radius_exponent);
 
                 for (int m = 0; m < numberofsteps_luminosity; m++) {
 
                     luminosity_multiplier = 5.0 + double(m);
-                    Model_Luminosity = luminosity_multiplier * pow(10, 33);
+                    Model_Luminosity = luminosity_multiplier * pow(10, luminosity_exponent);
 
                     std::cout << setw(20) << Model_Luminosity << "    ";
                     std::cout << "\n";
@@ -1188,26 +1207,6 @@ int main(int argc, char* argv[]) {
     }
 }
 
-
-
-
-//std::cout << setw(20) << "Transformed Pressure Variables Intermediate Values" << "    ";
-//std::cout << setw(20) << C << "    ";
-//std::cout << setw(20) << D << "    ";
-//std::cout << setw(20) << p_zero << "    ";
-//std::cout << setw(20) << pcentre_numerator << "    ";
-//std::cout << setw(20) << pcentre_denominator << "    ";
-//std::cout << setw(20) << pcentre << "    ";
-//std::cout << setw(20) << pstarc << "    ";
-//std::cout << "\n";
-//std::cout << "\n";
-//std::cout << "\n";
-
-//std::cout << setw(20) << "Transformed Distance Variables Intermediate Values" << "    ";
-//std::cout << setw(20) << x_zero << "    ";
-//std::cout << "\n";
-//std::cout << "\n";
-//std::cout << "\n";
 
 
 //if (tmpr > zero_pressure_distance) {
